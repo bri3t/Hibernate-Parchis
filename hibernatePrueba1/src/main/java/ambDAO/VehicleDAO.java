@@ -3,7 +3,7 @@ package ambDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
-import model.Vehicle;
+import model.Jugador;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -17,7 +17,7 @@ public class VehicleDAO implements IVehicleDAO {
 	}
 
 	@Override
-	public void saveOrUpdate(Vehicle vehicle) {
+	public void saveOrUpdate(Jugador vehicle) {
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
@@ -36,7 +36,7 @@ public class VehicleDAO implements IVehicleDAO {
 	}
 
 	@Override
-	public void delete(Vehicle vehicle) {
+	public void delete(Jugador vehicle) {
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
@@ -56,17 +56,17 @@ public class VehicleDAO implements IVehicleDAO {
 	}
 
 	@Override
-	public Vehicle getVehicle(String vin) {	
+	public Jugador getVehicle(String vin) {	
 		return null;
 	}
 
 	@Override
-	public List<Vehicle> get(String marca) {
+	public List<Jugador> get(String marca) {
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.beginTransaction();
-			List<Vehicle> vehicles = session.createQuery("SELECT e FROM Vehicle e "
+			List<Jugador> vehicles = session.createQuery("SELECT e FROM Vehicle e "
 					+ "WHERE marca = '" + marca +"'" ).list();
 			
 			return vehicles;
@@ -84,11 +84,11 @@ public class VehicleDAO implements IVehicleDAO {
 	}
 
 	@Override
-	public List<Vehicle> get(String marca, String model) {
+	public List<Jugador> get(String marca, String model) {
 		Session session = sessionFactory.getCurrentSession();
 		try {
 			session.beginTransaction();
-			List<Vehicle> vehicles = session.createQuery("SELECT e FROM Vehicle e "
+			List<Jugador> vehicles = session.createQuery("SELECT e FROM Vehicle e "
 					+ "WHERE marca = " + marca + " AND model = " + model).list();
 			
 			return vehicles;
@@ -104,11 +104,11 @@ public class VehicleDAO implements IVehicleDAO {
 	}
 
 	@Override
-	public List<Vehicle> get(int anyFabricacio) {
+	public List<Jugador> get(int anyFabricacio) {
 		Session session = sessionFactory.getCurrentSession();
 		try {
 			session.beginTransaction();
-			List<Vehicle> vehicles = session.createQuery("SELECT e FROM Vehicle e "
+			List<Jugador> vehicles = session.createQuery("SELECT e FROM Vehicle e "
 					+ "WHERE any_fabricacio = " + anyFabricacio + "").list();
 			
 			return vehicles;

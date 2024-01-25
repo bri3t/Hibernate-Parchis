@@ -31,26 +31,11 @@ public class main {
 			VehicleDAO vehicleDAO = new VehicleDAO();
 			session = getSessionFactory().openSession();			
 			
-			Vehicle v1 = new Vehicle("123", "marca-1", "model-1", 2024);
 			
 			session.beginTransaction();
-			
-			vehicleDAO.saveOrUpdate(v1);
+		
 			session.getTransaction().commit();
 
-//			DESCOMENTAR PARA ELIMINAR
-//			vehicleDAO.delete(v1);
-//			session.getTransaction().commit();
-			
-//			No funcionan los gets :(
-			List<Vehicle> vehicles = vehicleDAO.get(v1.getMarca());
-			System.out.println(vehicles.toString());				
-//			
-//			List<Vehicle> vehicles = vehicleDAO.get(v1.getMarca(), v1.getModel());
-//			System.out.println(vehicles.toString());
-			
-//			List<Vehicle> vehicles = vehicleDAO.get(v1.getAnyFabricacio());
-//			System.out.println(vehicles.toString());
 			
 					
 		} catch (Exception sqlException) {
