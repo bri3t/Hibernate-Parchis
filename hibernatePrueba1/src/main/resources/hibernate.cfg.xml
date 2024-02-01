@@ -21,10 +21,10 @@
 		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
 		
 		<!-- AQUI POSEU LES CLASSES QUE REPRESENTEN TAULES QUE FEU SERVIR -->
-		<mapping class="model.Jugador" />
-		<mapping class="model.Partida" />
-		<mapping class="model.Casella" />
-		<mapping class="model.Fitxes" />
+		<mapping class="model.Jugador"/>
+		<mapping class="model.Partida"/>
+		<mapping class="model.Casella"/>
+		<mapping class="model.Fitxes"/>
 		
 		
 	</session-factory>
