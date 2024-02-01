@@ -28,12 +28,11 @@ public class main {
 
 	public static void main(String[] args) {
 		try {
-			VehicleDAO vehicleDAO = new VehicleDAO();
 			session = getSessionFactory().openSession();			
 			
+			Partida partida1 = new Partida();
 			
 			session.beginTransaction();
-		
 			session.getTransaction().commit();
 
 			
