@@ -24,7 +24,7 @@
 		<mapping class="model.Jugador"/>
 		<mapping class="model.Partida"/>
 		<mapping class="model.Casella"/>
-		<mapping class="model.Fitxes"/>
+		<mapping class="model.Fitxa"/>
 		
 		
 	</session-factory>

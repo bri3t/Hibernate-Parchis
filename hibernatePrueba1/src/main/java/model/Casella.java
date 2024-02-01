@@ -21,7 +21,7 @@ public class Casella {
 	@Column(name = "TIPUS_CASELLA", nullable = false)
 	private String tipusCasella;
 	
-	@Column(name = "POSICIO", nullable = false)
+	@Column(name = "POSICIÓ", nullable = false)
 	private int posicio;
 	
 	@ManyToOne

@@ -10,6 +10,7 @@ import javax.persistence.Table;
 @Table(name = "Fitxa")
 public class Fitxa {
 	
+	@ManyToOne
 	@Column(name="POSICIÓ", nullable=false)
 	private int posicio;
 	
