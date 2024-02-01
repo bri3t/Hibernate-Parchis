@@ -24,7 +24,7 @@ public class Partida {
 	private Date dataFin;
 	
 	@ManyToOne
-	@JoinColumn(name="ID_JUGADOR")
+	@JoinColumn(name="Jugador.ID_JUGADOR")
 	private int id_Guanyador;
 	
 	@Column(name="ENCURS")

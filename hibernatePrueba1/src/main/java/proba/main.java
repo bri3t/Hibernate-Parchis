@@ -28,9 +28,8 @@ public class main {
 
 	public static void main(String[] args) {
 		try {
-			session = getSessionFactory().openSession();			
+			session = getSessionFactory().openSession();		
 			
-			Partida partida1 = new Partida();
 			
 			session.beginTransaction();
 			session.getTransaction().commit();
@@ -38,6 +37,7 @@ public class main {
 			
 					
 		} catch (Exception sqlException) {
+			System.out.println("ddd");
 			sqlException.printStackTrace();
 			if (null != session.getTransaction()) {
 				System.out.println("\n.......Transaction Is Being Rolled Back.......");

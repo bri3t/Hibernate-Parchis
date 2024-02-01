@@ -2,6 +2,9 @@ package model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -10,12 +13,18 @@ import javax.persistence.Table;
 @Table(name = "Fitxa")
 public class Fitxa {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_FITXA")
+	private int id_Fitxa;
+	
 	@ManyToOne
-	@Column(name="POSICIÓ", nullable=false)
+	@JoinColumn(name="POSICIÓ", nullable=false)
 	private int posicio;
 	
 	@Column(name="ACTIVA", nullable=false)
 	private boolean isActive;
+
 	
 	@ManyToOne
 	@JoinColumn(name="ID_JUGADOR")
