@@ -24,7 +24,7 @@ public class Partida {
 
     @ManyToOne
     @JoinColumn(name = "ID_JUGADOR")
-    private Jugador jugador;
+    private Jugador jugadorGuanyador;
 
     @Column(name = "ENCURS")
     private boolean enCurs;
@@ -32,12 +32,13 @@ public class Partida {
     public Partida() {
     }
 
-    public int getJugadors() {
-        return jugadors;
-    }
+	public Partida(int jugadors, Date dataInici, boolean enCurs) {
+		super();
+		this.jugadors = jugadors;
+		this.dataInici = dataInici;
+		this.enCurs = enCurs;
+	}
 
-    public void setJugadors(int jugadors) {
-        this.jugadors = jugadors;
-    }
+   
 
 }

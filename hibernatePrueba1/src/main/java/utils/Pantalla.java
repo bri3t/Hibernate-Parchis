@@ -5,6 +5,8 @@ import org.hibernate.Session;
 
 import proba.main;
 import DAOImpl.*;
+import ambDAO.PartidaDAO;
+import model.Partida;
 
 public class Pantalla {
 
@@ -61,7 +63,10 @@ public class Pantalla {
                     case 1:
                         continuar = false;
                         JugadorDAOImpl jdi = new JugadorDAOImpl(session);
-                        jdi.initzialitzarJugadors(demanarJugadors());
+                        int num = demanarJugadors();
+                        jdi.initzialitzarJugadors(num);
+                        PartidaDAOImpl p = new PartidaDAOImpl(session);
+                        p.iniciarPartida(num);
                         break;
                     case 2:
                         session.beginTransaction();

@@ -37,6 +37,48 @@ public class Fitxa {
 	
 	public Fitxa() {
 	}
+
+	public int getId_Fitxa() {
+		return id_Fitxa;
+	}
+
+	public void setId_Fitxa(int id_Fitxa) {
+		this.id_Fitxa = id_Fitxa;
+	}
+
+	public Casella getCasella() {
+		return casella;
+	}
+
+	public void setCasella(Casella casella) {
+		this.casella = casella;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public Jugador getJugador() {
+		return jugador;
+	}
+
+	public void setJugador(Jugador jugador) {
+		this.jugador = jugador;
+	}
+
+	public Partida getPartida() {
+		return partida;
+	}
+
+	public void setPartida(Partida partida) {
+		this.partida = partida;
+	}
+	
+	
 	
 	
 }

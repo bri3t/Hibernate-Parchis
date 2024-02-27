@@ -24,5 +24,40 @@ public class Casella {
 	public Casella() {
 		
 	}
+
+	public int getId_Casella() {
+		return id_Casella;
+	}
+
+	public void setId_Casella(int id_Casella) {
+		this.id_Casella = id_Casella;
+	}
+
+	public String getTipusCasella() {
+		return tipusCasella;
+	}
+
+	public void setTipusCasella(String tipusCasella) {
+		this.tipusCasella = tipusCasella;
+	}
+
+	public int getPosicio() {
+		return posicio;
+	}
+
+	public void setPosicio(int posicio) {
+		this.posicio = posicio;
+	}
+
+	public Partida getPartida() {
+		return partida;
+	}
+
+	public void setPartida(Partida partida) {
+		this.partida = partida;
+	}
+	
+	
+	
 	
 }
