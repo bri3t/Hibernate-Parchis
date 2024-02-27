@@ -26,6 +26,7 @@ public class JugadorDAOImpl implements IJugadorDAO{
 			session.beginTransaction();
 			session.getTransaction().commit();
 		}
+		System.out.println("Jugadors creats correctament!");
 	}
 
 	@Override

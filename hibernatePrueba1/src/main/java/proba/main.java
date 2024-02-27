@@ -12,29 +12,27 @@ import utils.Pantalla;
 import model.*;
 
 public class main {
-	
-	static Session session;
-	static SessionFactory sessionFactory;
-	static ServiceRegistry serviceRegistry;
-	
-	public static synchronized SessionFactory getSessionFactory() {
-		if (sessionFactory == null) {
 
-			serviceRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+    static Session session;
+    static SessionFactory sessionFactory;
+    static ServiceRegistry serviceRegistry;
 
-			sessionFactory = new MetadataSources(serviceRegistry).buildMetadata().buildSessionFactory();
-		}
-		return sessionFactory;
-	}
+    public static synchronized SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
 
-	
-	
-	public static void main(String[] args) {
-		
-		Pantalla p = new Pantalla();
-		
-		p.comprovarOpcio();
-		
-	}
+            serviceRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+
+            sessionFactory = new MetadataSources(serviceRegistry).buildMetadata().buildSessionFactory();
+        }
+        return sessionFactory;
+    }
+
+    public static void main(String[] args) {
+
+        Pantalla p = new Pantalla();
+
+        p.comprovarOpcio();
+
+    }
 
 }

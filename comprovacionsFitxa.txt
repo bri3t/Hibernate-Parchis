@@ -1,0 +1,12 @@
+------- Comprovacio al moure fitxa -------
+
+1. Si es el tercer cop que treus dobles, eliminar la ultima fitxa teva que s'ha mogut
+
+2. Si treu un 5 treure fitxa
+	2.1. Nomes es pot treure la fitxa si hi han 1 o 0 fitxes a la casella de sortida.
+
+3. Abans de ralitzar el moviment, comprovar que no hi hagin 2 fitxes a la mateixa casella.
+
+4. Comprovar si ha eliminat alguna altre fitxa
+	4.1. Si es així, eliminar la fitxa del contrincant
+	4.2. Sumar 20 posicions a una fitxa aleatoria que pugui fer els 20 moviments, sinó, es mostra missatge d'avís.

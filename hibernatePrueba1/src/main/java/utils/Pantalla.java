@@ -7,56 +7,77 @@ import proba.main;
 import DAOImpl.*;
 
 public class Pantalla {
-	
-	private static Session session;
-	private Scanner sc = new Scanner(System.in);
-	
-	private final String MENU = "***********************\n"
-			+ "* 1. Jugar partida    *\n"
-			+ "* 2. Crear BBDD       *\n"
-			+ "* 3. Sortir           *\n"
-			+ "***********************\n"
-			+ "> ";
 
-	public Pantalla() {
-		session = main.getSessionFactory().openSession();
-	}
-	
-	private void imprimirMenu () {
-		System.out.print(MENU);
-	}
-	
-	public void comprovarOpcio(){
-		
-		boolean continuar = true;
-		
-		do {
-			imprimirMenu();
-			
+    private static Session session;
+    private Scanner sc = new Scanner(System.in);
+
+    private final String MENU = "***********************\n"
+            + "* 1. Jugar partida    *\n"
+            + "* 2. Crear BBDD       *\n"
+            + "* 3. Sortir           *\n"
+            + "***********************\n"
+            + "> ";
+
+    public Pantalla() {
+        session = main.getSessionFactory().openSession();
+    }
+
+    private void imprimirMenu() {
+        System.out.print(MENU);
+    }
+    
+    private int demanarJugadors() {
+    	
+		sc.nextLine();
+    	while (true) {
+			System.out.println("Introdueix el nombre de jugadors (2-4)");
 			if (sc.hasNextInt()) {
-				int opcio = sc.nextInt();
-				
-				switch (opcio) {
-				case 1:
-					continuar = false;
-					JugadorDAOImpl jdi = new JugadorDAOImpl(session);
-					jdi.initzialitzarJugadors(2);
-					break;
-				case 2:
-					session.beginTransaction();
-					session.getTransaction().commit();
-					
-					break;
-				default:
-					System.out.println("adeu");
-					System.exit(0);
+				int num = sc.nextInt();
+				if (num >= 2 && num <= 4) {
+					return num;
+				}else {
+					System.out.println("Numero introduit incorrecte");
+					sc.nextLine();
 				}
-			} else {
-				System.out.println("Escriu un nombre entre el 1 i el 3");
+			}else {
+				System.out.println("El valor ha de ser un nombre");
 				sc.nextLine();
 			}
-			
-		} while (continuar);
-		
-	}
+		}
+    	
+    }
+
+    public void comprovarOpcio() {
+
+        boolean continuar = true;
+
+        do {
+            imprimirMenu();
+
+            if (sc.hasNextInt()) {
+                int opcio = sc.nextInt();
+
+                switch (opcio) {
+                    case 1:
+                        continuar = false;
+                        JugadorDAOImpl jdi = new JugadorDAOImpl(session);
+                        jdi.initzialitzarJugadors(demanarJugadors());
+                        break;
+                    case 2:
+                        session.beginTransaction();
+                        session.getTransaction().commit();
+
+                        break;
+                    default:
+                        System.out.println("adeu");
+                        System.exit(0);
+                }
+            } else {
+                System.out.println("Escriu un nombre entre el 1 i el 3");
+                sc.nextLine();
+            }
+
+        } while (continuar);
+
+    }
 }
