@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Table(name = "Partida")
 public class Partida {
 	
-	Scanner sc = new Scanner(System.in);
 	int jugadors;
 	
 	@Id
@@ -24,16 +23,13 @@ public class Partida {
 	private Date dataFin;
 	
 	@ManyToOne
-	@JoinColumn(name="Jugador.ID_JUGADOR")
-	private int id_Guanyador;
+	@JoinColumn(name="ID_JUGADOR")
+	private Jugador jugador;
 	
 	@Column(name="ENCURS")
 	private boolean enCurs;
 
 	public Partida() {
-		super();
-		this.jugadors = 0;
-		iniciarPartida();
 	}
 	
 	
@@ -48,24 +44,24 @@ public class Partida {
 
 
 	private void iniciarPartida(){
-		boolean continuar = true;
-		
-		do {
-			System.out.println("Indica quants jugadors jugaran: 2-4");
-			if (sc.hasNextInt()) {
-				jugadors = sc.nextInt();
-				if (jugadors < 2 || jugadors > 4) {
-					System.out.println("ERR: Numero de jugadors invalid. (2-4");
-					sc.nextLine();
-				}else {
-					this.dataInici = new java.sql.Date(System.currentTimeMillis());
-					this.enCurs = true;
-				}
-			}else{
-				System.out.println("ERR: Numero de jugadors invalid. (2-4");
-				sc.nextLine();
-			}
-		} while (continuar);
+//		boolean continuar = true;
+//		
+//		do {
+//			System.out.println("Indica quants jugadors jugaran: 2-4");
+//			if (sc.hasNextInt()) {
+//				jugadors = sc.nextInt();
+//				if (jugadors < 2 || jugadors > 4) {
+//					System.out.println("ERR: Numero de jugadors invalid. (2-4");
+//					sc.nextLine();
+//				}else {
+//					this.dataInici = new java.sql.Date(System.currentTimeMillis());
+//					this.enCurs = true;
+//				}
+//			}else{
+//				System.out.println("ERR: Numero de jugadors invalid. (2-4");
+//				sc.nextLine();
+//			}
+//		} while (continuar);
 		
 	}
 		

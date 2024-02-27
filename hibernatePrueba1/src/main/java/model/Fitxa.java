@@ -13,6 +13,7 @@ import javax.persistence.Table;
 @Table(name = "Fitxa")
 public class Fitxa {
 	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_FITXA")
@@ -20,7 +21,7 @@ public class Fitxa {
 	
 	@ManyToOne
 	@JoinColumn(name="POSICIÓ", nullable=false)
-	private int posicio;
+	private Casella casella;
 	
 	@Column(name="ACTIVA", nullable=false)
 	private boolean isActive;
@@ -28,21 +29,13 @@ public class Fitxa {
 	
 	@ManyToOne
 	@JoinColumn(name="ID_JUGADOR")
-	private int id_Jugador;
+	private Jugador jugador;
 	
 	@ManyToOne
 	@JoinColumn(name="ID_PARTIDA")
-	private int id_Partida;
+	private Partida partida;
 	
-	private int passos;
-
-	public Fitxa(int id_Jugador, int id_Partida) {
-		super();
-		this.passos = 0;
-		this.posicio = 0;
-		this.isActive = false;
-		this.id_Jugador = id_Jugador;
-		this.id_Partida = id_Partida;
+	public Fitxa() {
 	}
 	
 	

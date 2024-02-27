@@ -1,13 +1,6 @@
 package model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Casella")
@@ -26,14 +19,10 @@ public class Casella {
 	
 	@ManyToOne
 	@JoinColumn(name="ID_PARTIDA")
-	private int id_Partida;
+	private Partida partida;
 
-	public Casella(int id_Casella, String tipusCasella, int posicio, int id_Partida) {
-		super();
-		this.id_Casella = id_Casella;
-		this.tipusCasella = tipusCasella;
-		this.posicio = posicio;
-		this.id_Partida = id_Partida;
+	public Casella() {
+		
 	}
 	
 }

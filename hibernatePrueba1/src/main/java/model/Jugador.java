@@ -24,13 +24,6 @@ public class Jugador {
 		
 	}
 
-	public Jugador(String nom, String color) {
-		super();
-		this.nom = nom;
-		this.color = color;
-		this.victories = 0;
-	}
-
 	public int getId_Jugador() {
 		return id_Jugador;
 	}
@@ -41,6 +34,18 @@ public class Jugador {
 
 	public String getColor() {
 		return color;
+	}
+
+	public void setId_Jugador(int id_Jugador) {
+		this.id_Jugador = id_Jugador;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	public int getVictories() {

@@ -6,8 +6,9 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
 import java.util.List;
+import java.util.Scanner;
 
-import ambDAO.VehicleDAO;
+import utils.Pantalla;
 import model.*;
 
 public class main {
@@ -16,7 +17,7 @@ public class main {
 	static SessionFactory sessionFactory;
 	static ServiceRegistry serviceRegistry;
 	
-	public static synchronized SessionFactory getSessionFactory () {
+	public static synchronized SessionFactory getSessionFactory() {
 		if (sessionFactory == null) {
 
 			serviceRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
@@ -26,31 +27,13 @@ public class main {
 		return sessionFactory;
 	}
 
+	
+	
 	public static void main(String[] args) {
-		try {
-			session = getSessionFactory().openSession();		
-			
-			
-			session.beginTransaction();
-			session.getTransaction().commit();
-
-			
-					
-		} catch (Exception sqlException) {
-			System.out.println("ddd");
-			sqlException.printStackTrace();
-			if (null != session.getTransaction()) {
-				System.out.println("\n.......Transaction Is Being Rolled Back.......");
-				session.getTransaction().rollback();
-			}
-			sqlException.printStackTrace();
-		} finally {
-			if (session != null) {
-				session.close();
-			}
 		
-			
-		}
+		Pantalla p = new Pantalla();
+		
+		p.comprovarOpcio();
 		
 	}
 
