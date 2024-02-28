@@ -17,9 +17,9 @@ public class Casella {
 	@Column(name = "POSICIÓ", nullable = false)
 	private int posicio;
 	
-	@ManyToOne
-	@JoinColumn(name="ID_PARTIDA")
-	private Partida partida;
+//	@ManyToOne
+//	@JoinColumn(name="ID_PARTIDA")
+//	private Partida partida;
 
 	public Casella() {
 		
@@ -49,13 +49,13 @@ public class Casella {
 		this.posicio = posicio;
 	}
 
-	public Partida getPartida() {
-		return partida;
-	}
-
-	public void setPartida(Partida partida) {
-		this.partida = partida;
-	}
+//	public Partida getPartida() {
+//		return partida;
+//	}
+//
+//	public void setPartida(Partida partida) {
+//		this.partida = partida;
+//	}
 	
 	
 	

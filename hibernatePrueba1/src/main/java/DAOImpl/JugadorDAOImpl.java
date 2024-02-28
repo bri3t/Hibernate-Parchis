@@ -15,11 +15,13 @@ import ambDAO.*;
 
 public class JugadorDAOImpl implements IJugadorDAO{
 
+	// inicialitzacio de variables
 	private Session session;
 	private String[] colors = {"Blau", "Groc", "Verd", "Vermell"};
 	Random rn = new Random();
 	private Partida p;
 	
+	//constructors
 	public JugadorDAOImpl(Session session, Partida p) {
 		super();
 		this.session = session;
@@ -31,18 +33,42 @@ public class JugadorDAOImpl implements IJugadorDAO{
 		this.session = session;
 	}
 
+	// metode per inicialitzar els jugadors
 	@Override
 	public void initzialitzarJugadors(int nombreJugadors) {
-		for (int i = 0; i < nombreJugadors; i++) {
-			Jugador jugador = new Jugador();
-			jugador.setColor(colors[i]);
-			jugador.setNom("jugador "+ colors[i]);
-			jugador.setVictories(0);
-			session.saveOrUpdate(jugador);
-			session.beginTransaction();
-			session.getTransaction().commit();
+		
+		Query query = session.createNativeQuery("SELECT COUNT(*) FROM jugador");
+		int count = ((Number) query.getSingleResult()).intValue();
+		if (count == 0) {
+			for (int i = 0; i < nombreJugadors; i++) {
+				_crearJugadors(i);
+			}			
 		}
+		
+		query = session.createNativeQuery("SELECT COUNT(*) FROM jugador WHERE ID_JUGADOR = 3");
+		count = ((Number) query.getSingleResult()).intValue();
+		if (count == 0 && nombreJugadors >= 3) {
+			_crearJugadors(2);
+		}
+		
+		query = session.createNativeQuery("SELECT COUNT(*) FROM jugador WHERE ID_JUGADOR = 4");
+		count = ((Number) query.getSingleResult()).intValue();
+		if (count == 0 && nombreJugadors >= 4) {
+			_crearJugadors(3);
+		}
+		
+		
 		System.out.println("Jugadors creats correctament!");
+	}
+	
+	private void _crearJugadors(int num) {
+		Jugador jugador = new Jugador();
+		jugador.setColor(colors[num]);
+		jugador.setNom("jugador "+ colors[num]);
+		jugador.setVictories(0);
+		session.saveOrUpdate(jugador);
+		session.beginTransaction();
+		session.getTransaction().commit();
 	}
 
 	@Override
@@ -71,14 +97,13 @@ public class JugadorDAOImpl implements IJugadorDAO{
 			
 			Fitxa ultimaFitxa = new Fitxa();
 			if (contDobles == 3) {
-				Query query = session.createNativeQuery("SELECT * FROM casella WHERE POSICIÓ = :posicio AND ID_PARTIDA = :idp", Casella.class)
-						.setParameter("posicio", 0)
-						.setParameter("idp", p.getId_Partida());
+				Query query = session.createNativeQuery("SELECT * FROM casella WHERE POSICIÓ = :posicio", Casella.class)
+						.setParameter("posicio", 0);
 				Casella c = (Casella) query.getSingleResult();
 				ultimaFitxa.setCasella(c);
 				ultimaFitxa.setActive(false);
 				ultimaFitxa.setPasos(0);
-				session.saveOrUpdate(ultimaFitxa);
+				session.delete(ultimaFitxa);
 				session.beginTransaction();
 				session.getTransaction().commit();
 			}

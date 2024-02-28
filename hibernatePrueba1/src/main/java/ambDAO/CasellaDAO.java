@@ -5,6 +5,4 @@ import model.Casella;
 public interface CasellaDAO {
 
 	
-	
-	
 }

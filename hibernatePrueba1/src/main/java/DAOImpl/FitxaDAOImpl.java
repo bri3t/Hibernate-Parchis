@@ -45,15 +45,15 @@ public class FitxaDAOImpl implements FitxaDAO{
 			finalitzarRecorregut(fitxa);
 		}else {
 			
-			Query query = session.createNativeQuery("SELECT * FROM casella WHERE POSICIÓ = :posicio AND ID_PARTIDA = :idp", Casella.class)
-					.setParameter("posicio", aux)
-					.setParameter("idp", p.getId_Partida());
+			Query query = session.createNativeQuery("SELECT * FROM casella WHERE POSICIÓ = :posicio", Casella.class)
+					.setParameter("posicio", aux);
+			
 			Casella c = (Casella) query.getSingleResult();
 			fitxa.setCasella(c);
 			fitxa.setPasos(aux);
 			
 		}
-		session.saveOrUpdate(fitxa);
+		session.update(fitxa);
 		session.beginTransaction();
 		session.getTransaction().commit();
 		
@@ -61,13 +61,12 @@ public class FitxaDAOImpl implements FitxaDAO{
 
 	@Override
 	public void capturarFitxa(Fitxa fitxa) {
-		Query query = session.createNativeQuery("SELECT * FROM casella WHERE POSICIÓ = :pos AND POSICIÓ <> 69 AND ID_PARTIDA = :idp", Casella.class)
-				.setParameter("pos", 0)
-				.setParameter("idp", p.getId_Partida());
+		Query query = session.createNativeQuery("SELECT * FROM casella WHERE POSICIÓ = :pos AND POSICIÓ <> 69", Casella.class)
+				.setParameter("pos", 0);
 		Casella c = (Casella) query.getSingleResult();
 		fitxa.setCasella(c);
 		fitxa.setPasos(0);
-		session.saveOrUpdate(fitxa);
+		session.update(fitxa);
 		session.beginTransaction();
 		session.getTransaction().commit();
 	}
@@ -81,9 +80,9 @@ public class FitxaDAOImpl implements FitxaDAO{
 		if (jugador.getColor().equalsIgnoreCase("Blau")) posicio = 22;
 		if (jugador.getColor().equalsIgnoreCase("Vermell")) posicio = 39;
 		if (jugador.getColor().equalsIgnoreCase("Verd")) posicio = 56;
-		Query query_2 = session.createNativeQuery("SELECT * FROM casella WHERE POSICIÓ = :posicio AND ID_PARTIDA = :idp", Casella.class)
-				.setParameter("posicio", posicio)
-				.setParameter("idp", p.getId_Partida());
+		Query query_2 = session.createNativeQuery("SELECT * FROM casella WHERE POSICIÓ = :posicio", Casella.class)
+				.setParameter("posicio", posicio);
+		
 		Casella c = (Casella) query_2.getSingleResult();
 		fitxa.setCasella(c);
 		fitxa.setActive(true);
@@ -96,9 +95,8 @@ public class FitxaDAOImpl implements FitxaDAO{
 	@Override
 	public boolean verificarCasaSegura(int posicio) {
 		boolean casaSegura = false;
-		Query query = session.createNativeQuery("SELECT * FROM casella WHERE POSICIÓ = :posicio AND ID_PARTIDA = :idp", Casella.class)
-				.setParameter("posicio", posicio)
-				.setParameter("idp", p.getId_Partida());
+		Query query = session.createNativeQuery("SELECT * FROM casella WHERE POSICIÓ = :posicio", Casella.class)
+				.setParameter("posicio", posicio);
 		Casella c = (Casella) query.getSingleResult();
 		if (c.getTipusCasella().equalsIgnoreCase("salvens")) {
 			casaSegura = true;
@@ -108,12 +106,12 @@ public class FitxaDAOImpl implements FitxaDAO{
 
 	@Override
 	public void finalitzarRecorregut(Fitxa fitxa) {
-		Query query = session.createNativeQuery("SELECT * FROM casella WHERE POSICIÓ = 69 AND ID_PARTIDA = :idp", Casella.class)
-				.setParameter("idp", p.getId_Partida());
+		Query query = session.createNativeQuery("SELECT * FROM casella WHERE POSICIÓ = 69", Casella.class);
+		
 		Casella cFinal = (Casella) query.getSingleResult();
 		fitxa.setActive(false);
 		fitxa.setCasella(cFinal);
-		session.saveOrUpdate(fitxa);
+		session.update(fitxa);
 		session.beginTransaction();
 		session.getTransaction().commit();
 	}

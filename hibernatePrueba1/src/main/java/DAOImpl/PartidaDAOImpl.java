@@ -34,25 +34,32 @@ public class PartidaDAOImpl implements PartidaDAO{
 		session.save(p);
 		
 		Casella cInicial = new Casella();
+		cInicial.setPosicio(0);
+		cInicial.setId_Casella(1);
+		cInicial.setTipusCasella("casa");
 		
-		for (int i = 0; i <= 69; i++) {
-			Casella c = new Casella();
-			c.setPosicio(i);
-			String tipus = "normal";
-			if (salvens.contains(i)) tipus = "salvens";
-			c.setTipusCasella(tipus);
-			c.setPartida(p);
-			if (i == 0) {
-				c.setTipusCasella("casa");
-				cInicial = c;				
+		Query query = session.createNativeQuery("SELECT COUNT(*) FROM casella");
+		int count = ((Number) query.getSingleResult()).intValue();
+		if (count == 0 ) {
+
+			for (int i = 0; i <= 69; i++) {
+				Casella c = new Casella();
+				c.setPosicio(i);
+				String tipus = "normal";
+				if (salvens.contains(i)) tipus = "salvens";
+				c.setTipusCasella(tipus);
+	//			c.setPartida(p);
+				if (i == 0) {
+					c.setTipusCasella("casa");
+				}
+				if (i == 69) {
+					c.setTipusCasella("final");
+				}
+				session.save(c);
 			}
-			if (i == 69) {
-				c.setTipusCasella("final");
-			}
-			session.saveOrUpdate(c);
 		}
 		
-		Query query = session.createNativeQuery("SELECT * FROM jugador", Jugador.class);
+		query = session.createNativeQuery("SELECT * FROM jugador", Jugador.class);
 		this.listJugadors = query.list();
 		int indexJugador = 0;
 		for (int i = 1; i <= 4 * num; i++) {
@@ -67,9 +74,11 @@ public class PartidaDAOImpl implements PartidaDAO{
 			}
 			session.saveOrUpdate(fitxa);
 		}
+		
         session.beginTransaction();
 		session.getTransaction().commit();
 		
+
 		jugarPartida();
 	}
 	
