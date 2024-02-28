@@ -14,7 +14,7 @@ public class Jugador {
 	@Column(name="NOM", length=30, nullable=false)
 	private String nom;
 	
-	@Column(name="COLOR", length=7, nullable=false, unique = true)
+	@Column(name="COLOR", length=7, nullable=false)
 	private String color;
 	
 	@Column(name="VICTORIES", nullable=false)

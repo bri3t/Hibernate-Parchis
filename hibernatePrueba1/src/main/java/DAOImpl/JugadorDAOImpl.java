@@ -8,6 +8,7 @@ import org.hibernate.Session;
 
 import ambDAO.IJugadorDAO;
 import model.Jugador;
+import model.Partida;
 import model.Casella;
 import model.Fitxa;
 import ambDAO.*;
@@ -17,6 +18,13 @@ public class JugadorDAOImpl implements IJugadorDAO{
 	private Session session;
 	private String[] colors = {"Blau", "Groc", "Verd", "Vermell"};
 	Random rn = new Random();
+	private Partida p;
+	
+	public JugadorDAOImpl(Session session, Partida p) {
+		super();
+		this.session = session;
+		this.p = p;
+	}
 	
 	public JugadorDAOImpl(Session session) {
 		super();
@@ -47,7 +55,7 @@ public class JugadorDAOImpl implements IJugadorDAO{
 
 	@Override
 	public void tirarDaus(Jugador jugador) {
-		FitxaDAOImpl fitxaDAO = new FitxaDAOImpl(session);
+		FitxaDAOImpl fitxaDAO = new FitxaDAOImpl(session, p);
 		boolean doble = false;
 		int contDobles = 0;
 		int dau1;
@@ -63,17 +71,20 @@ public class JugadorDAOImpl implements IJugadorDAO{
 			
 			Fitxa ultimaFitxa = new Fitxa();
 			if (contDobles == 3) {
-				Query query = session.createNativeQuery("SELECT * FROM casella WHERE POSICIÓ = :posicio", Casella.class).setParameter("posicio", 0);
+				Query query = session.createNativeQuery("SELECT * FROM casella WHERE POSICIÓ = :posicio AND ID_PARTIDA = :idp", Casella.class)
+						.setParameter("posicio", 0)
+						.setParameter("idp", p.getId_Partida());
 				Casella c = (Casella) query.getSingleResult();
 				ultimaFitxa.setCasella(c);
 				ultimaFitxa.setActive(false);
-				session.saveOrUpdate(c);
+				ultimaFitxa.setPasos(0);
+				session.saveOrUpdate(ultimaFitxa);
 				session.beginTransaction();
 				session.getTransaction().commit();
 			}
 			
 			if (dau1 == 5) {
-				Query query = session.createNativeQuery("SELECT * FROM fitxa WHERE ACTIVA = FALSE AND ID_JUGADOR = :id", Fitxa.class).setParameter("id", jugador.getId_Jugador());
+				Query query = session.createNativeQuery("SELECT * FROM fitxa WHERE ACTIVA = FALSE AND ID_JUGADOR = :id AND PASOS = 0", Fitxa.class).setParameter("id", jugador.getId_Jugador());
 				List<Fitxa> resultList = query.getResultList();
 				if (!resultList.isEmpty()) {
 					Fitxa fitxa = resultList.get(rn.nextInt(resultList.size()));
@@ -83,7 +94,7 @@ public class JugadorDAOImpl implements IJugadorDAO{
 			}
 			
 			if (dau2 == 5) {
-				Query query = session.createNativeQuery("SELECT * FROM fitxa WHERE ACTIVA = FALSE AND ID_JUGADOR = :id", Fitxa.class).setParameter("id", jugador.getId_Jugador());
+				Query query = session.createNativeQuery("SELECT * FROM fitxa WHERE ACTIVA = FALSE AND ID_JUGADOR = :id AND PASOS = 0", Fitxa.class).setParameter("id", jugador.getId_Jugador());
 				List<Fitxa> resultList = query.getResultList();
 				if (!resultList.isEmpty()) {
 					Fitxa fitxa = resultList.get(rn.nextInt(resultList.size()));
@@ -103,11 +114,18 @@ public class JugadorDAOImpl implements IJugadorDAO{
 							.setParameter("pos", fitxa.getCasella().getPosicio())
 							.setParameter("id", fitxa.getId_Fitxa())
 							.setParameter("idJ", fitxa.getJugador().getId_Jugador());
-					List<Fitxa> resultList_2 = query.getResultList();
+					List<Fitxa> resultList_2 = query_2.getResultList();
 					if (resultList_2.size() == 1) {
 						if (!fitxaDAO.verificarCasaSegura(fitxa.getCasella().getPosicio())) {
 							fitxaDAO.capturarFitxa(resultList.get(0));
 							fitxaDAO.moureFitxa(fitxa, 20);
+							query = session.createNativeQuery("SELECT * FROM fitxa WHERE ID_FITXA = :id", Fitxa.class)
+									.setParameter("id", fitxa.getId_Fitxa());
+							fitxa = (Fitxa) query.getSingleResult();
+							
+							break;
+						}else {
+							break;
 						}	
 					} else {
 						break;
@@ -124,5 +142,7 @@ public class JugadorDAOImpl implements IJugadorDAO{
 		
 	
 	}
+	
+
 	
 }

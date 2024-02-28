@@ -39,6 +39,54 @@ public class Partida {
 		this.enCurs = enCurs;
 	}
 
+	public int getJugadors() {
+		return jugadors;
+	}
+
+	public void setJugadors(int jugadors) {
+		this.jugadors = jugadors;
+	}
+
+	public int getId_Partida() {
+		return id_Partida;
+	}
+
+	public void setId_Partida(int id_Partida) {
+		this.id_Partida = id_Partida;
+	}
+
+	public Date getDataInici() {
+		return dataInici;
+	}
+
+	public void setDataInici(Date dataInici) {
+		this.dataInici = dataInici;
+	}
+
+	public Date getDataFin() {
+		return dataFin;
+	}
+
+	public void setDataFin(Date dataFin) {
+		this.dataFin = dataFin;
+	}
+
+	public Jugador getJugadorGuanyador() {
+		return jugadorGuanyador;
+	}
+
+	public void setJugadorGuanyador(Jugador jugadorGuanyador) {
+		this.jugadorGuanyador = jugadorGuanyador;
+	}
+
+	public boolean isEnCurs() {
+		return enCurs;
+	}
+
+	public void setEnCurs(boolean enCurs) {
+		this.enCurs = enCurs;
+	}
+
    
 
 }

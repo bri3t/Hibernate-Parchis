@@ -53,6 +53,7 @@ public class Pantalla {
 
         boolean continuar = true;
 
+        
         do {
             imprimirMenu();
 
@@ -61,19 +62,17 @@ public class Pantalla {
 
                 switch (opcio) {
                     case 1:
-                        continuar = false;
                         JugadorDAOImpl jdi = new JugadorDAOImpl(session);
                         int num = demanarJugadors();
                         jdi.initzialitzarJugadors(num);
                         PartidaDAOImpl p = new PartidaDAOImpl(session);
                         p.iniciarPartida(num);
-                        break;
                     case 2:
                         session.beginTransaction();
                         session.getTransaction().commit();
 
                         break;
-                    default:
+                    case 3:
                         System.out.println("adeu");
                         System.exit(0);
                 }

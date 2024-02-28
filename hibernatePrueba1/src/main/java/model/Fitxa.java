@@ -25,6 +25,9 @@ public class Fitxa {
 	
 	@Column(name="ACTIVA", nullable=false)
 	private boolean isActive;
+	
+	@Column(name="PASOS", nullable=false)
+	private int pasos;
 
 	
 	@ManyToOne
@@ -37,6 +40,20 @@ public class Fitxa {
 	
 	public Fitxa() {
 	}
+	
+	
+
+	public int getPasos() {
+		return pasos;
+	}
+
+
+
+	public void setPasos(int pasos) {
+		this.pasos = pasos;
+	}
+
+
 
 	public int getId_Fitxa() {
 		return id_Fitxa;
