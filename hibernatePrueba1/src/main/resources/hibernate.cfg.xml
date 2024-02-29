@@ -10,7 +10,7 @@
 	
         <property name = "hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 		<!-- aixo ho heu de canviar per les vostres dades -->
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/parchis</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/parchisArnauMarioXavi</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">admin1234</property>
 		<!--Esta es importante y la trataremos mas tarde -->

@@ -29,8 +29,9 @@ public class main {
 
     public static void main(String[] args) {
 
-        Pantalla p = new Pantalla();
+        Pantalla p = new Pantalla(); // es crea una instancia de pantalal i s'executa el metode de comprovarOpcio per a arrancar el programa
 
+        
         p.comprovarOpcio();
 
     }

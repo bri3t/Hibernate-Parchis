@@ -30,14 +30,18 @@ public class PartidaDAOImpl implements PartidaDAO{
         // Convertir la fecha y hora actuales a un objeto java.sql.Date
         java.sql.Date fechaSql = new java.sql.Date(fechaYHoraActual.getTime());
         
+        //crea una partida y la inserta a la BBDD
         p = new Partida(num, fechaSql, true);
 		session.save(p);
+		
 		
 		Casella cInicial = new Casella();
 		cInicial.setPosicio(0);
 		cInicial.setId_Casella(1);
 		cInicial.setTipusCasella("casa");
 		
+		
+		// crea totes les caselles aixo ho fara nomes el primer cop
 		Query query = session.createNativeQuery("SELECT COUNT(*) FROM casella");
 		int count = ((Number) query.getSingleResult()).intValue();
 		if (count == 0 ) {
@@ -59,6 +63,7 @@ public class PartidaDAOImpl implements PartidaDAO{
 			}
 		}
 		
+		//crea les fitxes per a la partida actual
 		query = session.createNativeQuery("SELECT * FROM jugador", Jugador.class);
 		this.listJugadors = query.list();
 		int indexJugador = 0;

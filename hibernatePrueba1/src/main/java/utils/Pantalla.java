@@ -62,17 +62,21 @@ public class Pantalla {
 
                 switch (opcio) {
                     case 1:
+                    	// en cas que esculli la primera opció:
                         JugadorDAOImpl jdi = new JugadorDAOImpl(session);
+                        // demana la quantitat de jguadors que jugaran la partida
                         int num = demanarJugadors();
                         jdi.initzialitzarJugadors(num);
                         PartidaDAOImpl p = new PartidaDAOImpl(session);
+                        // inicia la partida
                         p.iniciarPartida(num);
                     case 2:
+                    	// crea la bbbdd
                         session.beginTransaction();
                         session.getTransaction().commit();
-
                         break;
                     case 3:
+                    	// surt
                         System.out.println("adeu");
                         System.exit(0);
                 }
