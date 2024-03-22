@@ -1,2 +1,2 @@
-# Parchis-de-los-buenos
+# Hibernate-Parchis
  
